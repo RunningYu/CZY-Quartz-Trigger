@@ -6,7 +6,7 @@ Quartz任务调度器开发组件
 ### QuartzTriggerInfoDTO 类属性如下：
 
 ```java
-	@ApiModelProperty("服务名称")
+    @ApiModelProperty("服务名称")
     private String serverName;
 
     @ApiModelProperty("目标调用接口url")
