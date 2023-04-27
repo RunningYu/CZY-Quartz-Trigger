@@ -62,6 +62,6 @@ Quartz任务调度器开发组件
 
 #### exeQuartzTriggerTaskInTimeEveryDay( QuartzTriggerInfoDTO quartzTriggerInfoDTO ) 
 
-- 封装好 上面的**QuartzTriggerDeleteDTO** 作为参数，调用QuartzTriggerClient 类中的**exeQuartzTriggerTaskInTimeEveryDay**接口，便可根据hour、minute、second来在每一天中的 时:分:秒 执行url接口任务。
+- 封装好 上面的**QuartzTriggerInfoDTO** 作为参数，调用QuartzTriggerClient 类中的**exeQuartzTriggerTaskInTimeEveryDay**接口，便可根据hour、minute、second来在每一天中的 时:分:秒 执行url接口任务。
 
 #### 
