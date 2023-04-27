@@ -95,7 +95,9 @@ public class QuartzTriggerClient {
         return null;
     }
 
-    @ApiOperation("更新同步")
+    /**
+     * 重复执行任务
+     */
     public void exeQuartzTriggerTaskInTimeEveryDay(QuartzTriggerInfoDTO quartzTriggerInfoDTO) {
         TriggerKey triggerKey = TriggerKey.triggerKey(quartzTriggerInfoDTO.getJobName(), quartzTriggerInfoDTO.getGroupName());
         String triggerTime = quartzTriggerInfoDTO.getSecond() + " " + quartzTriggerInfoDTO.getMinute() + " " + quartzTriggerInfoDTO.getHour() + " * * ? *";
