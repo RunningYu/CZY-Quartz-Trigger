@@ -21,7 +21,7 @@ public class QuartzTriggerInfoDTO {
     @ApiModelProperty("开始执行时间")
     private Long exeTime;
 
-    @ApiModelProperty("任务名")
+    @ApiModelProperty("任务名（唯一）")
     private String jobName;
 
     @ApiModelProperty("组名")

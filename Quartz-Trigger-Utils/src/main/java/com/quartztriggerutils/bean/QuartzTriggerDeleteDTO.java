@@ -3,6 +3,7 @@ package com.quartztriggerutils.bean;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import org.quartz.JobKey;
 
 /**
  * @author : 其然乐衣Letitbe
@@ -17,4 +18,5 @@ public class QuartzTriggerDeleteDTO {
 
     @ApiModelProperty("组名 or 服务名称")
     private String groupName;
+
 }

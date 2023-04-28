@@ -5,13 +5,14 @@ import com.quartztriggerutils.bean.QuartzTriggerDeleteDTO;
 import com.quartztriggerutils.bean.QuartzTriggerInfoDTO;
 import com.quartztriggerutils.job.QuartzJob;
 import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author : 其然乐衣Letitbe
@@ -21,6 +22,11 @@ import java.text.SimpleDateFormat;
 @Configuration
 @Slf4j
 public class QuartzTriggerClient {
+
+    /**
+     * 记录现有的定时任务的唯一标识 jobName
+     */
+    public static final List<JobKey> jobList = new ArrayList<>();
 
     /**
      * 注入调度器
@@ -33,9 +39,14 @@ public class QuartzTriggerClient {
      */
     public void exeQuartzTriggerTask(QuartzTriggerInfoDTO quartzTriggerInfoDTO) {
 
+        JobKey jobKey = new JobKey(quartzTriggerInfoDTO.getJobName(),quartzTriggerInfoDTO.getGroupName());
+        if (jobList.contains( jobKey )) {
+            log.error("this jobName:{} already exists，please change another unique jobName", quartzTriggerInfoDTO.getJobName());
+            return;
+        }
         String[] dates = getDates(quartzTriggerInfoDTO.getExeTime());
         TriggerKey triggerKey = TriggerKey.triggerKey(quartzTriggerInfoDTO.getJobName(), quartzTriggerInfoDTO.getGroupName());
-        String trrigerTime = dates[5] + " " + dates[4] + " " + dates[3] + " " + dates[2] + " " + dates[1] + " ? " + dates[0];
+        String triggerTime = dates[5] + " " + dates[4] + " " + dates[3] + " " + dates[2] + " " + dates[1] + " ? " + dates[0];
 
         log.info("QuartzEvents quartTriggerInTime triggerTime:{}", dates[0] + "-" + dates[1] + "-" + dates[2] + "- " + dates[3] + ":" + dates[4] + ":" + dates[5]);
 
@@ -49,18 +60,19 @@ public class QuartzTriggerClient {
                 trigger = TriggerBuilder.newTrigger()
                         .withIdentity(triggerKey)
                         .usingJobData("url", quartzTriggerInfoDTO.getUrl())
-                        .withSchedule(CronScheduleBuilder.cronSchedule(trrigerTime))
+                        .withSchedule(CronScheduleBuilder.cronSchedule(triggerTime))
                         .startNow()
                         .build();
-                //                                      封装job
                 JobDetail jobDetail = JobBuilder.newJob(QuartzJob.class)
                         .withIdentity(quartzTriggerInfoDTO.getJobName(), quartzTriggerInfoDTO.getGroupName())
                         .build();
                 scheduler.scheduleJob(jobDetail, trigger);
                 scheduler.start();
             }
+            jobList.add( jobKey );
+
         } catch (SchedulerException e) {
-            e.printStackTrace();
+            log.error("Quartz-Trigger QuartzTriggerClient exeQuartzTriggerTask error:{}", e);
         }
     }
 
@@ -68,14 +80,16 @@ public class QuartzTriggerClient {
      * 取消定时任务
      */
     public void cancelQuartzTriggerTask(QuartzTriggerDeleteDTO quartzTriggerDeleteDTO) {
-        // todo 优化 -> 先判断是否存在该定时任务
-
         JobKey jobKey = new JobKey(quartzTriggerDeleteDTO.getJobName(), quartzTriggerDeleteDTO.getGroupName());
         log.info("QuartzTriggerClient cancelQuartzTriggerTask -> cancel this task of jobKey:{}", jobKey);
         try {
+            if (!jobList.contains( jobKey )) {
+                log.error("no such jobTrigger of jobName:{} groupName:{}", quartzTriggerDeleteDTO.getJobName(), quartzTriggerDeleteDTO.getGroupName());
+                return;
+            }
             scheduler.deleteJob(jobKey);
         } catch (SchedulerException e) {
-            log.error("QuartzTriggerClient cancelQuartzTriggerTask no this jobKey:{}", jobKey);
+            log.error("Quartz-Trigger QuartzTriggerClient cancelQuartzTriggerTask no this jobKey:{}", jobKey);
         }
 
     }
