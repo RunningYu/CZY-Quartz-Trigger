@@ -26,7 +26,7 @@ public class QuartzTriggerClient {
     /**
      * 记录现有的定时任务的唯一标识 jobName
      */
-    public static final List<JobKey> jobList = new ArrayList<>();
+    public static List<JobKey> jobList = new ArrayList<>();
 
     /**
      * 注入调度器
