@@ -19,6 +19,7 @@ public class quartzMain {
                 .build();
 
         int count = 0;
+		
 
         // 触发器
         Trigger trigger = TriggerBuilder.newTrigger()
