@@ -53,7 +53,6 @@ Quartz任务调度器开发组件
 - 析：会根据exeTime这个长整数值解析出对应的成年月日时分秒来设置定时任务调度。
 
 
-
 #### cancelQuartzTriggerTask(QuartzTriggerDeleteDTO quartzTriggerDeleteDTO)
 
 - 封装好上面**QuartzTriggerDeleteDTO** 作为参数，调用QuartzTriggerClient 类中的**cancelQuartzTriggerTask(QuartzTriggerDeleteDTO quartzTriggerDeleteDTO)**接口，便可根据groupName和jobName对应的jobKey来取消删除定时任务。
