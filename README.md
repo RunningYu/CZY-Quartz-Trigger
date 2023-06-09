@@ -47,20 +47,20 @@ Quartz任务调度器开发组件
 
 ## 接口
 
-#### **exeQuartzTriggerTask(QuartzTriggerInfoDTO quartzTriggerInfoDTO)**
+#### exeQuartzTriggerTask(QuartzTriggerInfoDTO quartzTriggerInfoDTO)
 
-- 封装好上面**QuartzTriggerInfoDTO** 作为参数，调用QuartzTriggerClient 类中的**exeQuartzTriggerTask(QuartzTriggerInfoDTO quartzTriggerInfoDTO)**接口，便可根据exeTime在对应的时间点去调用url对应的方法、接口。
+- 封装好上面QuartzTriggerInfoDTO 作为参数，调用QuartzTriggerClient 类中的exeQuartzTriggerTask(QuartzTriggerInfoDTO quartzTriggerInfoDTO)接口，便可根据exeTime在对应的时间点去调用url对应的方法、接口。
 - 析：会根据exeTime这个长整数值解析出对应的成年月日时分秒来设置定时任务调度。
 
 
 #### cancelQuartzTriggerTask(QuartzTriggerDeleteDTO quartzTriggerDeleteDTO)
 
-- 封装好上面**QuartzTriggerDeleteDTO** 作为参数，调用QuartzTriggerClient 类中的**cancelQuartzTriggerTask(QuartzTriggerDeleteDTO quartzTriggerDeleteDTO)**接口，便可根据groupName和jobName对应的jobKey来取消删除定时任务。
+- 封装好上面QuartzTriggerDeleteDTO 作为参数，调用QuartzTriggerClient 类中的cancelQuartzTriggerTask(QuartzTriggerDeleteDTO quartzTriggerDeleteDTO)接口，便可根据groupName和jobName对应的jobKey来取消删除定时任务。
 
   
 
 #### exeQuartzTriggerTaskInTimeEveryDay( QuartzTriggerInfoDTO quartzTriggerInfoDTO ) 
 
-- 封装好 上面的**QuartzTriggerInfoDTO** 作为参数，调用QuartzTriggerClient 类中的**exeQuartzTriggerTaskInTimeEveryDay**接口，便可根据hour、minute、second来在每一天中的 时:分:秒 执行url接口任务。
+- 封装好 上面的QuartzTriggerInfoDTO 作为参数，调用QuartzTriggerClient 类中的exeQuartzTriggerTaskInTimeEveryDay接口，便可根据hour、minute、second来在每一天中的 时:分:秒 执行url接口任务。
 
 #### 
