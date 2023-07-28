@@ -27,7 +27,7 @@ public class quartzTaskApplicationRunner implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        log.info("------------>quartzTaskApplicationRunner run ");
+        log.info("quartzTaskApplicationRunner run ");
         QuartzTriggerInfoDTO quartzTriggerInfoDTO = new QuartzTriggerInfoDTO();
         quartzTriggerInfoDTO.setGroupName("group1");
         quartzTriggerInfoDTO.setJobName("job1");
