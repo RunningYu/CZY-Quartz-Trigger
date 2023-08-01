@@ -48,7 +48,7 @@ public class QuartzTriggerClient {
         TriggerKey triggerKey = TriggerKey.triggerKey(quartzTriggerInfoDTO.getJobName(), quartzTriggerInfoDTO.getGroupName());
         String triggerTime = dates[5] + " " + dates[4] + " " + dates[3] + " " + dates[2] + " " + dates[1] + " ? " + dates[0];
 
-        log.info("QuartzEvents quartTriggerInTime triggerTime:{}", dates[0] + "-" + dates[1] + "-" + dates[2] + "- " + dates[3] + ":" + dates[4] + ":" + dates[5]);
+        log.info("QuartzEvents quartTriggerInTime triggerTime:[{}]", triggerTime);
 
         try {
             /*
