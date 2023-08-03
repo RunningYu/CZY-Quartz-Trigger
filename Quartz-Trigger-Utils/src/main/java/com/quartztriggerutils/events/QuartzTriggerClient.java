@@ -97,7 +97,7 @@ public class QuartzTriggerClient {
 
 
     /**
-     * 毫秒值 --> 格式化时间 --> 数组
+     * 毫秒值 --> 格式化时间 --> 时间数组
      * @return 数组
      */
     private String[] getDates(Long exeTime) {
